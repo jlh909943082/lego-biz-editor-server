@@ -5,12 +5,16 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const jwt = require('./middlewares/jwt')
 
 const index = require('./routes')
 const users = require('./routes/users')
 
 // error handler
 onerror(app)
+
+// 配置 jwt
+app.use(jwt)
 
 // middlewares
 app.use(bodyparser({
