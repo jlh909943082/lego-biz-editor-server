@@ -5,7 +5,8 @@
   "scripts": {
     "start": "set NODE_ENV=dev&node bin/www",
     "dev": "./node_modules/.bin/nodemon bin/www",
-    "prd": "pm2 start bin/www",
+    "prd-dev": "cross-env NODE_ENV=prd_dev pm2 start bin/pm2-prd-dev.config.js",
+    "prd": "cross-env NODE_ENV=production NODE_LOG_DIR=/tmp/editor-server ENABLE_NODE_LOG=YES pm2 start bin/pm2-prd.config.js",
     "test:local": "cross-env NODE_ENV=test_local jest --runInBand --passWithNoTests --colors --forceExit",
     "test:remote": "cross-env NODE_ENV=test-remote jest --runInBand --passWithNoTests --colors --forceExit"
   },
