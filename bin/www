@@ -27,7 +27,7 @@ var server = http.createServer(app.callback());
  */
 
 // 先同步 mysql数据表
-syncDb().then(() => {
+syncDb().finally(() => {
   // 再启动服务
   server.listen(port);
   server.on('error', onError);

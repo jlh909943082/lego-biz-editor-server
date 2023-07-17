@@ -1,27 +1,24 @@
 /**
- * @description prod-dev 配置
+ * @description prd-dev 配置
  * @author ji
  */
-module.exports = {
-  // mysql 连接配置
-  mysqlConf: {
-    host: 'localhost',
-    user: 'root',
-    password: 'admin',
-    port: '3306',
-    database: 'imooc_lego_course'
-  },
-  // mongodb 连接配置
-  mongodbConf: {
-    host: 'localhost',
-    port: '27017',
-    dbName: 'imooc_lego_course'
-  },
-  // redis 连接配置
-  redisConf: {
-    port: 6379,
-    host: '127.0.0.1'
-  },
-  // jwt 过期时间
-  jwtExpiresIn: '1d', // 1. 字符串，如 '1h' '2d'； 2. 数字，单位是 s
-}
+const devConf = require('./dev')
+
+// 修改redis连接配置
+Object.assign(devConf.redisConf, {
+  // 和 docker-compose 中配置的service名字一致
+  // [注意]端口依然是6379，而不是6378，后者是宿主机的端口
+  host: 'editor-redis'
+})
+
+// 修改mongodb连接配置
+Object.assign(devConf.mongodbConf, {
+  host: 'editor-mongo'
+})
+
+// 修改mysql连接配置
+Object.assign(devConf.mysqlConf, {
+  host: 'editor-mysql'
+})
+
+module.exports = devConf
